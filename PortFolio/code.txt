@@ -1,0 +1,22 @@
+portfolio-marvel/
+├── data/
+│   └── blog-posts.json         #  blog post data
+├── public/
+│   ├── css/
+│   │   └── style.css           #  existing CSS
+│   ├── js/
+│   │   └── script.js           #  existing JS (menu toggle, etc.)
+│   │   └── hljs/              # highlight.js library (downloaded or linked)
+│   │       └── styles/         # highlight.js themes
+│   │       └── highlight.min.js
+│   └── images/                 #  images (hero, projects, blog placeholders)
+├── views/
+│   ├── partials/
+│   │   ├── header.ejs
+│   │   └── footer.ejs
+│   ├── blog_list.ejs           # Template for /blog
+│   └── blog_detail.ejs         # Template for /blog/:slug
+│   └── (optional) index.ejs    # If you want a homepage served by Node
+├── server.js                   # The main Node.js application file
+├── package.json
+└── .gitignore

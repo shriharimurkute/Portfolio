@@ -1,0 +1,1272 @@
+/* --- Global Styles & Variables --- */
+:root {
+    --primary-bg: #0a192f; /* Deep Navy Blue - Good choice */
+    --secondary-bg: #112240; /* Slightly Lighter Navy - Good */
+    --card-bg: #1a3a63; /* Tech Panel Blue - Could be slightly less saturated? Maybe #172a45; Let's keep yours for now */
+    --text-primary: #ccd6f6; /* Light Grey/Blue Text - Standard, good */
+    --text-secondary: #8892b0; /* Greyer Text - Standard, good */
+    --accent-color: #64ffda; /* Bright Cyan/Teal Accent - Perfect */
+    --accent-glow: rgba(100, 255, 218, 0.7); /* Glow effect for accent - Good */
+    --border-color: rgba(100, 255, 218, 0.2); /* Subtle border - Good */
+    --shadow-color: rgba(2, 12, 27, 0.7); /* For darker, subtle shadows */
+    --heading-font: 'Orbitron', sans-serif;
+    --body-font: 'Montserrat', sans-serif;
+    --code-font: 'Fira Code', 'Courier New', monospace; /* Add a code font variable */
+    --transition-speed: 0.3s ease;
+    --transition-bounce: 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28); /* For bouncy effects */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* Consider adding a custom scrollbar for more theme consistency */
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) var(--secondary-bg);
+}
+/* For Webkit browsers (Chrome, Safari) */
+html::-webkit-scrollbar {
+    width: 8px;
+}
+html::-webkit-scrollbar-track {
+    background: var(--secondary-bg);
+}
+html::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 10px;
+    border: 2px solid var(--secondary-bg);
+}
+
+
+body {
+    font-family: var(--body-font);
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+
+    /* Add subtle grid background for ARCHITECT theme */
+    /* position: relative; Optional: if pseudo-element causes issues */
+}
+
+/* Optional: Subtle background grid */
+body::before {
+    content: '';
+    position: fixed; /* Keeps grid fixed while scrolling */
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+        linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px), /* Horizontal lines */
+        linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px); /* Vertical lines */
+    background-size: 30px 30px; /* Adjust grid size */
+    opacity: 0.6; /* Keep it very faint */
+    z-index: -1; /* Place it behind all content */
+    pointer-events: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+    color: var(--text-primary);
+    margin-bottom: 1rem; /* Default spacing */
+    letter-spacing: 1px;
+    font-weight: 700; /* Ensure headings are bold */
+}
+
+h2 { /* Section Headings */
+    font-size: clamp(1.8rem, 4vw, 2.5rem); /* More responsive heading size */
+    text-align: center;
+    margin-bottom: 4rem; /* More space below section titles */
+    position: relative;
+    padding-bottom: 1rem;
+    color: var(--accent-color); /* Make section title accent */
+    text-transform: uppercase; /* Architectural feel */
+    letter-spacing: 2px;
+}
+
+/* Section heading underline effect - Keep sharp */
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px; /* Slightly shorter */
+    height: 4px; /* Slightly thicker */
+    background-color: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-glow); /* Slightly larger glow */
+    border-radius: 1px; /* Almost sharp */
+}
+
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color var(--transition-speed), filter var(--transition-speed); /* Add filter transition */
+}
+
+a:hover {
+    color: white;
+    filter: brightness(1.2); /* Slightly brighten accent color on hover */
+}
+
+/* Add focus styles for accessibility */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 3px;
+    box-shadow: 0 0 10px var(--accent-glow); /* Add glow on focus */
+}
+/* Remove default outline when custom focus is applied */
+a:focus, button:focus, input:focus, textarea:focus {
+    outline: none;
+}
+
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--border-radius-sm); /* Add slight rounding to all images */
+}
+
+ul {
+    list-style: none;
+}
+
+.content-section {
+    padding: 6rem clamp(1rem, 5vw, 3rem); /* Responsive padding */
+    max-width: 1100px; /* Slightly reduced max-width for better line length */
+    margin: 0 auto;
+}
+
+/* --- Header / Navbar --- */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(10, 25, 47, 0.85); /* Semi-transparent */
+    backdrop-filter: blur(10px);
+    transition: top 0.3s ease-in-out, background-color 0.3s ease; /* Added background transition */
+    box-shadow: 0 2px 15px var(--shadow-color); /* Use shadow color variable */
+}
+
+/* Style for scrolled header (add class via JS) */
+.main-header.scrolled {
+    background-color: rgba(10, 25, 47, 0.95); /* Less transparent when scrolled */
+    box-shadow: 0 4px 20px var(--shadow-color);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem clamp(1rem, 5vw, 3rem); /* Responsive padding */
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.logo a {
+    font-family: var(--heading-font);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    letter-spacing: 1px;
+    transition: color var(--transition-speed);
+}
+.logo a:hover {
+    color: var(--accent-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem; /* Slightly more space */
+}
+
+.nav-links li a {
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    position: relative;
+    font-size: 0.95rem;
+    text-transform: uppercase; /* More professional */
+    letter-spacing: 1px;
+    font-weight: 600; /* Semi-bold */
+}
+
+.nav-links li a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; /* Slightly below text */
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width var(--transition-speed);
+}
+
+.nav-links li a:hover,
+.nav-links li a.active { /* Add 'active' class with JS on scroll */
+    color: var(--accent-color);
+}
+
+.nav-links li a:hover::after,
+.nav-links li a.active::after {
+    width: 100%;
+}
+
+
+.menu-toggle {
+    display: none; /* Hidden by default for larger screens */
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 5px; /* Easier to tap */
+    z-index: 1010; /* Ensure it's above nav links when absolute */
+}
+.menu-toggle:hover {
+    color: var(--accent-color);
+}
+
+/* Add class to toggle icon - Requires JS */
+.menu-toggle .fa-times { display: none; } /* Hide close icon initially */
+.menu-toggle.active .fa-bars { display: none; } /* Hide bars when active */
+.menu-toggle.active .fa-times { display: block; } /* Show close when active */
+
+
+/* --- Hero Section --- */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Align text to the left */
+    text-align: left; /* Align text to the left */
+    /* Use a more subtle/abstract tech background */
+    /* Example: Replace 'images/hero-background.jpg' with something abstract */
+    background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 1)), url('images/abstract-tech-bg.jpg') no-repeat center center/cover;
+    padding: clamp(1rem, 10vw, 5rem); /* Responsive padding */
+    position: relative;
+    max-width: 1100px; /* Match content section width */
+    margin: 0 auto; /* Center the content area */
+}
+
+.hero-content h1 {
+    font-size: clamp(2.8rem, 7vw, 5rem); /* Slightly larger base */
+    color: white;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px rgba(100, 255, 218, 0.6); /* Stronger glow */
+    font-weight: 700;
+}
+
+.hero-content .subtitle {
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem; /* More space */
+    font-family: var(--body-font); /* Use body font for subtitle */
+    font-weight: 400;
+}
+
+.hero-content .tagline {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: var(--accent-color);
+    font-family: var(--heading-font);
+    letter-spacing: 2px; /* Wider spacing */
+    margin-bottom: 3rem; /* More space before button */
+    font-weight: 400;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    padding: 0.9rem 2.2rem; /* Slightly larger button */
+    border-radius: var(--border-radius-sm); /* Consistent radius */
+    font-family: var(--heading-font); /* Button font */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: all var(--transition-speed);
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
+    position: relative; /* For potential pseudo-elements */
+    overflow: hidden; /* For effects */
+}
+.cta-button::before { /* Subtle shine effect on hover */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(100, 255, 218, 0.4), transparent);
+    transition: left var(--transition-speed) ease-out;
+}
+
+.cta-button:hover {
+    background-color: var(--accent-glow);
+    color: var(--primary-bg);
+    box-shadow: 0 0 25px var(--accent-glow);
+    transform: translateY(-3px); /* Slight lift */
+}
+.cta-button:hover::before {
+    left: 100%;
+}
+.cta-button:active {
+    transform: translateY(-1px); /* Click feedback */
+}
+
+/* Scroll Indicator - Refined Animation */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5; /* Ensure it's above potential pseudo-elements */
+}
+
+.scroll-indicator a {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.7;
+    transition: opacity var(--transition-speed);
+}
+.scroll-indicator a:hover {
+    opacity: 1;
+    color: var(--text-primary); /* Change color on hover */
+}
+
+.scroll-indicator span { /* The animated line */
+    display: block;
+    width: 1px;
+    height: 35px; /* Slightly longer */
+    background-color: var(--accent-color); /* Use accent color */
+    margin-bottom: 8px; /* More space */
+    animation: scroll-down-pulse 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 5px var(--accent-glow); /* Add glow */
+}
+
+/* Smoother pulse animation */
+@keyframes scroll-down-pulse {
+    0% { transform: scaleY(0); transform-origin: top; opacity: 0; }
+    50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    51% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+
+/* --- About Section --- */
+.about-content {
+    display: flex;
+    gap: 4rem; /* More spacing */
+    align-items: flex-start; /* Align items to top */
+}
+
+.about-image {
+    flex-basis: 35%;
+    max-width: 320px;
+    aspect-ratio: 1 / 1; /* Make it square */
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    border: 3px solid var(--border-color);
+    box-shadow: 0 5px 25px var(--shadow-color); /* Subtle shadow */
+    position: relative; /* For potential overlay */
+}
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image covers the area */
+    border-radius: 5px; /* Inner radius */
+    transition: transform var(--transition-speed), filter var(--transition-speed);
+    filter: grayscale(30%) contrast(90%); /* Subtle desaturation */
+}
+.about-image:hover img {
+    transform: scale(1.05);
+    filter: grayscale(0%) contrast(100%);
+}
+
+/* Optional: Image overlay */
+/* .about-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top left, var(--accent-glow), transparent 60%);
+    opacity: 0;
+    transition: opacity var(--transition-speed);
+}
+.about-image:hover::after {
+    opacity: 0.2;
+} */
+
+
+.about-text {
+    flex-basis: 65%;
+    color: var(--text-secondary);
+}
+.about-text p {
+    margin-bottom: 1.2rem; /* Slightly more paragraph spacing */
+    font-size: 1.05rem; /* Slightly larger body text */
+}
+.about-text strong, .about-text b { /* Style bold text */
+    color: var(--text-primary);
+    font-weight: 700; /* Ensure it's truly bold */
+}
+.about-text p:last-child {
+    margin-bottom: 0; /* Remove margin from last paragraph */
+}
+
+/* --- Skills Section --- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Slightly larger min width */
+    gap: 2rem; /* More gap */
+}
+
+.skill-card {
+    background-color: var(--secondary-bg); /* Use secondary bg for contrast */
+    padding: 2rem 1.5rem; /* Adjust padding */
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed), border-color var(--transition-speed);
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.skill-card:hover {
+    transform: translateY(-8px); /* Lift effect */
+    box-shadow: 0 12px 30px var(--shadow-color), 0 0 20px var(--accent-glow);
+    border-color: var(--accent-color); /* Highlight border */
+}
+
+.skill-icon {
+    font-size: 3.5rem; /* Larger icon */
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 15px var(--accent-glow); /* Stronger glow */
+    display: inline-block; /* Allows transform */
+    transition: transform var(--transition-speed);
+}
+.skill-card:hover .skill-icon {
+    transform: scale(1.1) rotate(-5deg); /* Add subtle rotation on hover */
+}
+
+.skill-card h3 {
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    font-size: 1.3rem;
+}
+
+.skill-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+
+/* --- Projects Section --- */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Larger base size */
+    gap: 2.5rem; /* Increase gap */
+}
+
+.project-card {
+    background-color: var(--secondary-bg);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform var(--transition-bounce), box-shadow var(--transition-bounce); /* Use bounce transition */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 20px var(--shadow-color);
+    display: flex; /* Use flexbox for better control */
+    flex-direction: column; /* Stack image and content */
+}
+
+.project-card:hover {
+    transform: scale(1.03) translateY(-5px); /* Combine scale and lift */
+    box-shadow: 0 15px 40px var(--shadow-color), 0 0 25px var(--accent-glow);
+    border-color: var(--accent-color);
+}
+
+.card-image {
+    height: 220px; /* Increased height */
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease, filter 0.5s ease; /* Add filter transition */
+    filter: saturate(0.8); /* Slightly desaturate initially */
+}
+
+.project-card:hover .card-image {
+    transform: scale(1.08); /* Slightly less zoom */
+    filter: saturate(1); /* Full saturation on hover */
+}
+
+
+.card-content {
+    padding: 1.5rem;
+    position: relative;
+    background: var(--secondary-bg); /* Solid background often looks cleaner */
+    flex-grow: 1; /* Ensure content area fills space */
+    display: flex;
+    flex-direction: column; /* Allow items to stack */
+}
+
+.card-content h3 {
+    margin-bottom: 0.75rem; /* Adjust spacing */
+    color: var(--text-primary);
+    font-size: 1.3rem;
+}
+
+.card-description { /* Add a short description area */
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Push tech icons down */
+}
+
+
+.card-tech-icons {
+    margin-top: auto; /* Push to bottom if needed (if no description flex-grow) */
+    display: flex;
+    flex-wrap: wrap; /* Allow icons to wrap */
+    gap: 0.8rem;
+    font-size: 0.9rem; /* Smaller text for tech stack */
+    color: var(--text-secondary);
+}
+.card-tech-icons span { /* Style tech stack items */
+    background-color: var(--card-bg); /* Use card background */
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+}
+.card-tech-icons span:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.view-details-prompt { /* Modify or remove if clicking card opens modal */
+    display: none; /* Hide if whole card is clickable */
+    /* position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity var(--transition-speed);
+    font-weight: bold; */
+}
+/* .project-card:hover .view-details-prompt {
+    opacity: 1;
+} */
+
+.loading-placeholder {
+    text-align: center;
+    padding: 4rem; /* More padding */
+    color: var(--text-secondary);
+    grid-column: 1 / -1; /* Span full width */
+    font-size: 1.2rem;
+}
+
+/* Add Skeleton Loader Style */
+.loading-placeholder.skeleton {
+    min-height: 350px; /* Match card height approximation */
+    background: linear-gradient(90deg, var(--secondary-bg) 25%, var(--card-bg) 50%, var(--secondary-bg) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite ease-in-out; /* Smooth animation */
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+    padding: 0; /* Remove text padding */
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+
+/* --- Project Modal --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 25, 47, 0.9); /* Dark overlay */
+    backdrop-filter: blur(5px); /* Add blur to background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0; /* Hidden by default */
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-container {
+    background-color: var(--secondary-bg);
+    padding: 2.5rem 3rem; /* More horizontal padding */
+    border-radius: var(--border-radius-md);
+    max-width: 850px; /* Slightly wider */
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 50px var(--shadow-color);
+    /* Initial state for animation */
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+    transition: transform var(--transition-bounce), opacity 0.3s ease-out; /* Use bounce */
+}
+
+/* Style for when modal is active */
+.modal-overlay.active .modal-container {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.close-modal-button {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    line-height: 1; /* Prevent extra space */
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color var(--transition-speed), transform var(--transition-speed);
+    padding: 0.5rem; /* Easier clicking */
+}
+
+.close-modal-button:hover {
+    color: var(--accent-color);
+    transform: rotate(90deg);
+}
+
+.modal-content h3 { /* Modal Title */
+    color: var(--accent-color);
+    margin-bottom: 2rem; /* More space */
+    text-align: center;
+    font-size: 2rem; /* Larger title */
+}
+.modal-content h4 { /* Subheadings in modal */
+    color: var(--text-primary);
+    margin-bottom: 0.8rem;
+    margin-top: 2rem; /* Space above subheadings */
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+#modal-image-container {
+    margin-bottom: 2rem;
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--border-color); /* Border around image */
+}
+#modal-image {
+     border: none; /* Remove inner border if container has one */
+     border-radius: 0; /* Image fits container */
+}
+
+#modal-description p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem; /* Space between paragraphs */
+    line-height: 1.7; /* Improve readability */
+}
+
+#modal-tech-list {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+#modal-tech-list li {
+    background-color: var(--card-bg);
+    color: var(--text-primary); /* Slightly brighter text */
+    padding: 0.4rem 0.9rem; /* Adjust padding */
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+    border: 1px solid var(--border-color);
+    font-family: var(--code-font); /* Use code font for tech */
+}
+
+.modal-links {
+    margin-top: 2.5rem; /* More space */
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap on small screens */
+    gap: 1.5rem; /* More gap */
+    justify-content: center; /* Center buttons */
+}
+
+/* Use .cta-button styles for consistency */
+.modal-link {
+    /* Inherit from .cta-button */
+    padding: 0.7rem 1.8rem; /* Slightly adjusted padding */
+    font-size: 0.9rem;
+}
+.modal-link.secondary {
+    background-color: transparent;
+    border-color: var(--text-secondary);
+    color: var(--text-secondary);
+    box-shadow: none;
+}
+.modal-link.secondary:hover {
+     background-color: rgba(136, 146, 176, 0.1); /* Subtle background */
+     color: var(--text-primary);
+     border-color: var(--text-primary);
+     transform: translateY(-2px); /* Add slight lift */
+}
+
+/* Hide links if URL is empty or just '#' - Adjusted selector */
+a.modal-link[href=""], a.modal-link[href="#"] {
+    display: none;
+}
+
+
+/* --- Contact Section --- */
+.contact-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+.contact-content > p { /* Direct child paragraph */
+    color: var(--text-secondary);
+    margin-bottom: 3rem; /* More space */
+    font-size: 1.1rem;
+}
+
+.contact-form .form-group {
+    margin-bottom: 1.5rem;
+    position: relative; /* For potential icons later */
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 1.1rem; /* Increase padding */
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    color: var(--text-primary);
+    font-family: var(--body-font);
+    font-size: 1rem;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.contact-form input[type="text"]::placeholder,
+.contact-form input[type="email"]::placeholder,
+.contact-form textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6; /* Slightly more subtle */
+}
+
+/* No need for separate :focus rule if using :focus-visible */
+/* .contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-glow);
+} */
+
+.contact-form textarea {
+    min-height: 150px; /* Ensure decent height */
+    resize: vertical; /* Allow vertical resize */
+}
+
+.contact-form button {
+    margin-top: 1rem;
+    width: auto; /* Don't force full width */
+    /* Inherit .cta-button styles */
+}
+
+.social-links {
+    margin-top: 4rem; /* More space */
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem; /* Wider gap */
+}
+
+.social-links a {
+    font-size: 2.2rem; /* Larger icons */
+    color: var(--text-secondary);
+    transition: color var(--transition-speed), transform var(--transition-bounce); /* Bounce */
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+    transform: translateY(-5px) scale(1.1); /* Lift and scale */
+}
+
+
+/* --- Footer --- */
+.main-footer-bar {
+    text-align: center;
+    padding: 2rem 1rem; /* More padding */
+    background-color: var(--primary-bg); /* Match main background */
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 6rem; /* More space above footer */
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -5px 15px var(--shadow-color); /* Add top shadow */
+}
+
+.main-footer-bar p {
+    margin-bottom: 0.5rem;
+}
+.main-footer-bar p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* --- Blog Section Styles (Using existing classes, refinements) --- */
+/* .blog-section { } */
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem; /* Match project grid gap */
+    margin-bottom: 3rem;
+}
+
+.blog-card {
+    background-color: var(--secondary-bg);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: transform var(--transition-bounce), box-shadow var(--transition-bounce), border-color var(--transition-speed); /* Use bounce */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 20px var(--shadow-color);
+}
+
+.blog-card:hover {
+    transform: translateY(-8px) scale(1.02); /* Lift and slight scale */
+    box-shadow: 0 12px 30px var(--shadow-color), 0 0 15px var(--accent-glow);
+    border-color: var(--accent-color); /* Highlight border */
+}
+
+/* Re-use card-image style */
+.blog-card .card-image {
+    height: 200px; /* Consistent height */
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease, filter 0.5s ease; /* Match project card */
+    filter: saturate(0.8);
+}
+.blog-card:hover .card-image {
+     transform: scale(1.05); /* Slightly less zoom */
+     filter: saturate(1);
+}
+
+.blog-card .card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-bg); /* Ensure consistent background */
+}
+
+.blog-meta {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem; /* More space */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.blog-card h3 {
+    margin-bottom: 0.75rem; /* More space */
+    font-size: 1.4rem; /* Slightly larger blog title */
+    line-height: 1.3; /* Ensure title doesn't cramp */
+}
+
+.blog-card h3 a {
+    color: var(--text-primary);
+    transition: color var(--transition-speed);
+}
+.blog-card h3 a:hover {
+    color: var(--accent-color);
+}
+
+
+.blog-card .card-short-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem; /* Slightly larger desc */
+    margin-bottom: 1.5rem; /* More space before link */
+    flex-grow: 1; /* Pushes link to bottom */
+    line-height: 1.6;
+}
+
+.read-more-link {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    align-self: flex-start;
+    display: inline-flex; /* Align icon properly */
+    align-items: center;
+    gap: 5px; /* Space between text and icon */
+    transition: color var(--transition-speed); /* Add color transition */
+}
+.read-more-link i {
+    transition: transform var(--transition-speed);
+}
+.read-more-link:hover {
+    color: white; /* Brighter hover */
+}
+.read-more-link:hover i {
+    transform: translateX(5px);
+}
+
+#blog-loading {
+    grid-column: 1 / -1;
+    /* Use .loading-placeholder.skeleton styling */
+}
+
+.view-all-link {
+    text-align: center;
+    margin-top: 3rem; /* More space */
+}
+.view-all-link .cta-button.secondary { /* Refined secondary button */
+    background-color: transparent;
+    border-color: var(--text-secondary);
+    color: var(--text-secondary);
+    box-shadow: none;
+    transition: all var(--transition-speed); /* Add transition */
+}
+.view-all-link .cta-button.secondary:hover {
+     background-color: rgba(136, 146, 176, 0.1);
+     color: var(--text-primary);
+     border-color: var(--text-primary);
+     box-shadow: 0 0 15px rgba(136, 146, 176, 0.2);
+     transform: translateY(-3px);
+}
+
+/* --- Styles for Individual Blog/Project Detail Pages (Refinements) --- */
+
+/* Generic wrapper for detail content */
+.detail-page-wrapper {
+    padding-top: 5rem; /* Account for fixed header */
+}
+
+.detail-content-area { /* Shared between blog/project */
+    max-width: 800px; /* Consistent content width */
+    margin: 3rem auto;
+    padding: 0 clamp(1rem, 5vw, 2rem); /* Responsive padding */
+}
+
+/* Project Specific Hero */
+.project-detail-hero {
+    height: 45vh; /* Slightly reduced height */
+    background-size: cover;
+    background-position: center center; /* Ensure center */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    color: white;
+    margin-bottom: 3rem; /* Space below hero */
+}
+.project-detail-hero::after { /* Dark overlay - stronger gradient */
+    content: '';
+    position: absolute;
+    inset: 0; /* Covers entire area */
+    background: linear-gradient(180deg, rgba(10, 25, 47, 0.5) 0%, rgba(10, 25, 47, 0.95) 100%);
+    z-index: 0;
+}
+.project-detail-hero h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem); /* Responsive title */
+    z-index: 1;
+    position: relative;
+    text-shadow: 0 3px 15px var(--shadow-color); /* More defined shadow */
+    color: var(--accent-color); /* Use accent for project title */
+}
+
+/* Blog Post Specific Header (No big hero usually) */
+.blog-post-header {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 2rem;
+}
+.blog-post-header h1 { /* Blog title */
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+.blog-post-meta { /* Date, category etc. */
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Content styling (applies to both blog/project detail) */
+.detail-content-area h2, /* Use H2 for major sections within post/project */
+.detail-content-area h3 { /* Use H3 for subsections */
+     color: var(--text-primary); /* Primary text for subheadings */
+     margin-top: 2.5em;
+     margin-bottom: 1em;
+     padding-bottom: 0.5rem;
+     border-bottom: 1px solid var(--border-color);
+}
+.detail-content-area h2 { font-size: 1.8rem; }
+.detail-content-area h3 { font-size: 1.4rem; color: var(--accent-color); border-bottom: none; } /* Accent for H3 */
+
+.detail-content-area p {
+    color: var(--text-secondary);
+    margin-bottom: 1.3em;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.detail-content-area strong { color: var(--text-primary); font-weight: 700; }
+.detail-content-area em { color: var(--accent-color); font-style: italic; }
+.detail-content-area code { /* Inline code */
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    padding: 0.2em 0.4em;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--code-font);
+    font-size: 0.9em;
+    border: 1px solid var(--border-color);
+}
+
+.detail-content-area blockquote {
+    border-left: 4px solid var(--accent-color);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--text-secondary);
+    background-color: rgba(17, 34, 64, 0.5); /* Darker, matching secondary */
+    border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+    box-shadow: inset 3px 0 10px rgba(10, 25, 47, 0.3); /* Inner shadow */
+}
+.detail-content-area blockquote p { margin-bottom: 0; } /* Remove paragraph margin inside quote */
+
+
+/* Code Blocks (Prism.js okaidia-theme-like) */
+.detail-content-area pre[class*="language-"] {
+    background: #1c1e24; /* Slightly different dark for code */
+    color: #abb2bf;
+    padding: 1.5em;
+    margin: 2em 0;
+    overflow: auto;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+    font-family: var(--code-font);
+    font-size: 0.95em; /* Slightly larger code block text */
+    line-height: 1.5;
+    box-shadow: 0 5px 20px var(--shadow-color);
+}
+/* Add line numbers styling if using Prism line numbers plugin */
+.line-numbers .line-numbers-rows {
+    border-right: 1px solid var(--border-color) !important;
+    padding-right: 1em !important;
+    margin-right: 1em !important;
+    user-select: none;
+}
+.line-numbers-rows > span::before {
+    color: var(--text-secondary) !important;
+    opacity: 0.6;
+}
+
+/* Okaidia-like Token colors (Keep as is, they are good) */
+.token.comment, .token.prolog, .token.doctype, .token.cdata { color: #5c6370; font-style: italic;}
+.token.punctuation { color: #abb2bf; }
+.token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted { color: #e06c75; }
+.token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: #98c379; }
+.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { color: #56b6c2; /* Cyan/Accent-like */}
+.token.atrule, .token.attr-value, .token.keyword { color: #c678dd; }
+.token.function, .token.class-name { color: #61afef; }
+.token.regex, .token.important, .token.variable { color: #d19a66; }
+.token.important, .token.bold { font-weight: bold; }
+.token.italic { font-style: italic; }
+.token.entity { cursor: help; }
+
+
+/* Project Detail Specific Elements */
+.project-tech-list {
+     list-style: none;
+     padding-left: 0;
+     display: flex;
+     flex-wrap: wrap;
+     gap: 1rem;
+     margin-bottom: 2rem; /* Space below tech list */
+}
+.project-tech-list li {
+    background-color: var(--card-bg);
+    color: var(--text-primary); /* Brighter text */
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+    display: inline-flex; /* Use inline-flex */
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--code-font); /* Code font */
+    font-size: 0.9rem;
+}
+.project-tech-list li i { /* Icon within the tech list */
+    color: var(--accent-color);
+    font-size: 1.1em; /* Slightly larger icon relative to text */
+    margin-right: 3px; /* Icon spacing */
+}
+
+.project-gallery {
+    margin: 3rem 0;
+    /* Add styles for image grid or carousel here */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+.project-gallery img {
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-gallery img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+
+.project-links { /* Links on detail page */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    justify-content: center; /* Center buttons */
+    padding-top: 2rem; /* Space above */
+    border-top: 1px solid var(--border-color); /* Separator line */
+}
+/* Use .cta-button styles 
+.project-links a {
+    /* Inherit .cta-button 
+}*/
+
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.8rem; /* Adjust heading size */
+        margin-bottom: 3rem;
+    }
+    .content-section {
+        padding-top: 5rem; /* Less padding on top */
+        padding-bottom: 5rem;
+    }
+
+    .navbar {
+        padding: 0.8rem 1rem; /* Less padding */
+    }
+
+    .nav-links {
+        /* Keep existing mobile styles */
+        position: absolute;
+        top: 100%; /* Ensure it's below header */
+        left: 0;
+        width: 100%;
+        background-color: var(--secondary-bg); /* Mobile menu background */
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        box-shadow: 0 5px 10px var(--shadow-color);
+        /* Add animation for opening/closing */
+        max-height: 0; /* Start hidden */
+        overflow: hidden;
+        transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    }
+
+    .nav-links.active {
+        display: flex; /* Or block if flex not needed */
+        max-height: 500px; /* Adjust as needed */
+        padding: 1rem 0; /* Restore padding */
+    }
+
+    .nav-links li { width: 100%; text-align: center; }
+    .nav-links li a {
+        padding: 1rem 0;
+        display: block;
+        width: 100%;
+        font-size: 1rem; /* Slightly larger mobile links */
+    }
+     .nav-links li a::after { display: none; }
+
+    .menu-toggle { display: block; }
+
+    .hero-section {
+        align-items: center; /* Center align on mobile */
+        text-align: center; /* Center align on mobile */
+        min-height: 80vh; /* Reduce height slightly */
+    }
+    .hero-content h1 { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+    .hero-content .subtitle { font-size: clamp(1.1rem, 4vw, 1.5rem); }
+    .hero-content .tagline { font-size: clamp(1rem, 3.5vw, 1.2rem); }
+
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem; /* Reduce gap */
+    }
+    .about-image { margin: 0 auto 2rem auto; /* Center image */ max-width: 250px; }
+    .about-text { text-align: left; } /* Keep text left-aligned */
+
+    .skills-grid { grid-template-columns: 1fr; gap: 1.5rem; } /* Stack skills */
+    .project-grid { grid-template-columns: 1fr; gap: 2rem; } /* Stack projects */
+    .blog-grid { grid-template-columns: 1fr; gap: 2rem; } /* Stack blog posts */
+
+    .modal-container {
+        width: 95%;
+        padding: 2rem 1.5rem; /* Adjust padding */
+        max-height: 85vh;
+    }
+     .modal-content h3 { font-size: 1.6rem; }
+     .modal-links {
+        flex-direction: column; /* Stack buttons */
+        align-items: stretch; /* Make buttons full width */
+        gap: 1rem;
+     }
+     .modal-link { width: 100%; text-align: center; } /* Full width buttons */
+
+    .contact-content { padding: 0 1rem; } /* Add padding on sides */
+    .social-links { gap: 2rem; } /* Adjust gap */
+    .social-links a { font-size: 2rem; } /* Adjust icon size */
+
+    /* Detail pages */
+    .detail-content-area { margin-top: 2rem; margin-bottom: 2rem; }
+    .project-detail-hero { height: 35vh; }
+    .project-detail-hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+    .blog-post-header h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+}
+
+/* --- Animation Utilities (If using AOS/GSAP overrides) --- */
+/* Example: Slightly modify AOS fade-up */
+[data-aos="fade-up"] {
+    transform: translateY(30px); /* Start slightly lower */
+    transition-property: transform, opacity;
+}
+
+/* Make sure this is the end of the CSS file */
