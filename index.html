@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shrihari Murkute - Full Stack Developer & Data Analyst</title>
+
+    <!-- AOS CSS (Animation On Scroll) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+     <!-- Link to your CSS -->
+    <link rel="stylesheet" href="/PortFolio/style.css">
+
+    <!-- Google Fonts (Example: Orbitron for headings, Montserrat for body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome (Optional - for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#hero">SM // ARCHITECT</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <h1 data-aos="fade-down">Shrihari Murkute</h1>
+                <p class="subtitle" data-aos="fade-up" data-aos-delay="200">Full Stack Developer | Data Analyst</p>
+                <p class="tagline" data-aos="fade-up" data-aos-delay="400">Codename: ARCHITECT // Intelligent Solutions</p>
+                <a href="#projects" class="cta-button" data-aos="zoom-in" data-aos-delay="600">View Field Reports</a>
+            </div>
+            <div class="scroll-indicator">
+                <a href="#about"><span></span>Scroll</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section content-section">
+            <h2 data-aos="fade-right">MISSION BRIEFING // About Me</h2>
+            <div class="about-content" data-aos="fade-up">
+                <div class="about-image">
+                    <img src="/PortFolio/hari.jpg" alt="Shrihari Murkute - Placeholder">
+                     <!-- Replace with your actual photo -->
+                </div>
+                <div class="about-text">
+                    <p>Greetings! I'm Shrihari Murkute, a dedicated IT professional operating at the intersection of robust application development and insightful data analysis.</p>
+                    <p>As a 'Full Stack Developer', I architect and construct seamless digital experiences, from intuitive user interfaces to powerful backend systems. My passion lies in building scalable, efficient, and maintainable code.</p>
+                    <p>Simultaneously, as a 'Data Analyst', I delve into complex datasets to uncover hidden patterns, extract meaningful insights, and drive data-informed decisions. I believe that data is the blueprint for innovation.</p>
+                    <p>This dual expertise allows me to not only build the tools but also understand and leverage the information they generate, creating truly intelligent and impactful solutions. My mission is to translate complex requirements into elegant, functional realities.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section content-section">
+            <h2 data-aos="fade-left">ARSENAL // Skills</h2>
+            <div class="skills-grid">
+                <!-- Add your skills here -->
+                <div class="skill-card" data-aos="fade-up">
+                    <i class="fas fa-code skill-icon"></i>
+                    <h3>Frontend</h3>
+                    <p>HTML5, CSS3, JavaScript (ES6+), React, Vue.js, Responsive Design</p>
+                </div>
+                <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-server skill-icon"></i>
+                    <h3>Backend</h3>
+                    <p>Python (Django), Node.js (Express), REST APIs, Database Design</p>
+                </div>
+                <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                     <i class="fas fa-database skill-icon"></i>
+                    <h3>Databases</h3>
+                    <p>SQL (SQLite, MySQL), NoSQL (MongoDB), ORMs</p>
+                </div>
+                 <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+                     <i class="fas fa-chart-line skill-icon"></i>
+                    <h3>Data Analysis</h3>
+                    <p>Python (Pandas, NumPy, Matplotlib, Seaborn), SQL, Excel, Jupyter Notebooks, Statistical Analysis</p>
+                </div>
+                 <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
+                     <i class="fas fa-cloud skill-icon"></i>
+                    <h3>DevOps & Cloud</h3>
+                    <p>Git, Docker, AWS (Basic), CI/CD Concepts</p>
+                </div>
+                 <div class="skill-card" data-aos="fade-up" data-aos-delay="500">
+                     <i class="fas fa-tools skill-icon"></i>
+                    <h3>Tools</h3>
+                    <p>VS Code, Postman, Linux/Unix Shell, Agile Methodologies</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section content-section">
+             <h2 data-aos="fade-right">FIELD REPORTS // Projects</h2>
+             <div class="project-grid" id="project-grid">
+                 <!-- Project cards will be injected here by JavaScript -->
+                 <div class="loading-placeholder">Loading Project Data...</div>
+             </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section content-section">
+             <h2 data-aos="fade-left">ESTABLISH COMMS // Contact</h2>
+             <div class="contact-content">
+                <p data-aos="fade-up">Ready to collaborate or discuss an opportunity? Send a transmission.</p>
+                <form id="contact-form" class="contact-form" data-aos="fade-up" data-aos-delay="200">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required placeholder=" Designation (Name)">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required placeholder="Comms Channel (Email)">
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="5" required placeholder=" Message Transmission"></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Send Transmission</button>
+                </form>
+                <div class="social-links" data-aos="fade-up" data-aos-delay="400">
+                    <a href="https://www.linkedin.com/in/shrihari-murkute" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/shriharimurkute/" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="shreeharimurkute@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    <!-- Add other relevant links -->
+                </div>
+             </div>
+        </section>
+    </main>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-container">
+            <button id="close-modal" class="close-modal-button"><a href="/PortFolio/index.html">×</a></button>
+            <div class="modal-content">
+                <h3 id="modal-title">Project Title</h3>
+                <div id="modal-image-container">
+                     <img id="modal-image" src="/PortFolio/hari.jpg" alt="Project Image">
+                     <!-- Or video element -->
+                </div>
+                <div class="modal-description">
+                    <h4>Mission Details:</h4>
+                    <p id="modal-description">Full project description goes here...</p>
+                </div>
+                <div class="modal-tech">
+                    <h4>Technologies Deployed:</h4>
+                    <ul id="modal-tech-list">
+                        <!-- Tech items will be added here -->
+                    </ul>
+                </div>
+                <div class="modal-links">
+                    <h4>External Links:</h4>
+                    <a id="modal-live-link" href="#" target="_blank" rel="noopener noreferrer" class="cta-button modal-link">Live Demo</a>
+                    <a id="modal-repo-link" href="#" target="_blank" rel="noopener noreferrer" class="cta-button modal-link secondary">Code Repository</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Inside the <main> tag, after the Skills section -->
+
+<!-- Blog/Intel Reports Section -->
+<section id="blog" class="blog-section content-section">
+    <h2 data-aos="fade-left">INTEL REPORTS // Insights & Articles</h2>
+    <div class="blog-grid" id="blog-grid">
+        <!-- Blog post previews will be dynamically added or statically placed -->
+
+        <!-- Example Static Blog Post Card -->
+        <article class="blog-card" data-aos="fade-up">
+            <div class="card-image" style="background-image: url('images/blog-placeholder1.jpg');"></div>
+            <div class="card-content">
+                <p class="blog-meta"><time datetime="2023-10-27">Oct 27, 2023</time> | Category: Full Stack</p>
+                <h3><a href="/blog/post-slug-1/">Optimizing Database Queries: A Deep Dive</a></h3>
+                <p class="card-short-desc">Exploring indexing strategies and query optimization techniques for PostgreSQL...</p>
+                <a href="/blog/post-slug-1/" class="read-more-link">Read Full Report <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <article class="blog-card" data-aos="fade-up" data-aos-delay="100">
+             <div class="card-image" style="background-image: url('images/blog-placeholder2.jpg');"></div>
+             <div class="card-content">
+                <p class="blog-meta"><time datetime="2023-09-15">Sep 15, 2023</time> | Category: Data Analysis</p>
+                 <h3><a href="/blog/post-slug-2/">Unveiling Patterns: An Intro to EDA with Pandas</a></h3>
+                <p class="card-short-desc">A practical guide to performing Exploratory Data Analysis using the Python Pandas library...</p>
+                 <a href="/blog/post-slug-2/" class="read-more-link">Read Full Report <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <!-- Add more static examples or load dynamically -->
+        <div class="loading-placeholder" id="blog-loading">Loading Intel Reports...</div>
+
+    </div>
+    <div class="view-all-link" data-aos="fade-up">
+        <a href="/blog/" class="cta-button secondary">View All Reports</a>
+        <!-- Link to a dedicated blog listing page -->
+    </div>
+</section>
+
+<!-- Make sure the Contact section comes *after* the new Blog section -->
+<!-- <section id="contact" ... > ... </section> -->
+
+
+<footer class="main-footer-bar">
+    <p>© 2024 Shrihari Murkute. All rights reserved. // Codename: ARCHITECT</p>
+    <!--<p>Designed with <i class="fas fa-atom" style="color: var(--accent-glow);"></i> inspiration.</p>-->
+</footer>
+
+
+    <!-- GSAP Core -->
+    <script src="gsap.min.js"></script> <!-- Make sure path is correct -->
+
+    <!-- AOS JS (Animation On Scroll) -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800, // values from 0 to 3000, with step 50ms
+            once: true, // whether animation should happen only once - while scrolling down
+        });
+    </script>
+
+    <!-- Your Custom JavaScript -->
+    <script src="/PortFolio/script.js"></script>
+
+</body>
+</html>
